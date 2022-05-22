@@ -23,6 +23,10 @@
 		DF74853B2839D16200B885A6 /* WindModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF74853A2839D16200B885A6 /* WindModel.swift */; };
 		DF74853D2839D1F800B885A6 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF74853C2839D1F800B885A6 /* WeatherModel.swift */; };
 		DF74853F2839D2BC00B885A6 /* CloudsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF74853E2839D2BC00B885A6 /* CloudsModel.swift */; };
+		DF748542283A391300B885A6 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF748541283A391300B885A6 /* APIManager.swift */; };
+		DF748546283A3ABC00B885A6 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF748545283A3ABC00B885A6 /* URLRequest+Extensions.swift */; };
+		DF748549283A3CC200B885A6 /* URLConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF748548283A3CC200B885A6 /* URLConstant.swift */; };
+		DF74854B283A446300B885A6 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF74854A283A446300B885A6 /* APIHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +71,10 @@
 		DF74853A2839D16200B885A6 /* WindModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindModel.swift; sourceTree = "<group>"; };
 		DF74853C2839D1F800B885A6 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		DF74853E2839D2BC00B885A6 /* CloudsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudsModel.swift; sourceTree = "<group>"; };
+		DF748541283A391300B885A6 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		DF748545283A3ABC00B885A6 /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
+		DF748548283A3CC200B885A6 /* URLConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstant.swift; sourceTree = "<group>"; };
+		DF74854A283A446300B885A6 /* APIHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHandler.swift; sourceTree = "<group>"; };
 		F7C67FD6750F2BE59AABF08D /* Pods-weather issyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weather issyTests.release.xcconfig"; path = "Target Support Files/Pods-weather issyTests/Pods-weather issyTests.release.xcconfig"; sourceTree = "<group>"; };
 		FF42D1EE5152AA94FDD836FD /* Pods-weather issy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-weather issy.release.xcconfig"; path = "Target Support Files/Pods-weather issy/Pods-weather issy.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,7 +117,6 @@
 				012027252EF20E8D7A5AF6A9 /* Pods-weather issyTests.debug.xcconfig */,
 				F7C67FD6750F2BE59AABF08D /* Pods-weather issyTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -151,7 +158,9 @@
 				DF7485372839C96B00B885A6 /* Controllers */,
 				DF7485362839C96300B885A6 /* ViewModel */,
 				DF7485352839C95800B885A6 /* Models */,
-				DF7485342839C95000B885A6 /* API Manager */,
+				DF7485342839C95000B885A6 /* APIManager */,
+				DF748543283A3A6B00B885A6 /* Extensions */,
+				DF748547283A3C9100B885A6 /* Helper */,
 				DF7485042839C14800B885A6 /* AppDelegate.swift */,
 				DF7485062839C14800B885A6 /* SceneDelegate.swift */,
 				DF74850A2839C14800B885A6 /* Main.storyboard */,
@@ -179,11 +188,13 @@
 			path = "weather issyUITests";
 			sourceTree = "<group>";
 		};
-		DF7485342839C95000B885A6 /* API Manager */ = {
+		DF7485342839C95000B885A6 /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
+				DF748541283A391300B885A6 /* APIManager.swift */,
+				DF74854A283A446300B885A6 /* APIHandler.swift */,
 			);
-			path = "API Manager";
+			path = APIManager;
 			sourceTree = "<group>";
 		};
 		DF7485352839C95800B885A6 /* Models */ = {
@@ -210,6 +221,22 @@
 				DF7485082839C14800B885A6 /* ViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DF748543283A3A6B00B885A6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DF748545283A3ABC00B885A6 /* URLRequest+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DF748547283A3C9100B885A6 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				DF748548283A3CC200B885A6 /* URLConstant.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -451,8 +478,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF748542283A391300B885A6 /* APIManager.swift in Sources */,
 				DF74853F2839D2BC00B885A6 /* CloudsModel.swift in Sources */,
 				DF74853B2839D16200B885A6 /* WindModel.swift in Sources */,
+				DF748549283A3CC200B885A6 /* URLConstant.swift in Sources */,
+				DF74854B283A446300B885A6 /* APIHandler.swift in Sources */,
+				DF748546283A3ABC00B885A6 /* URLRequest+Extensions.swift in Sources */,
 				DF7485392839CAD500B885A6 /* MainModel.swift in Sources */,
 				DF7485092839C14800B885A6 /* ViewController.swift in Sources */,
 				DF7485052839C14800B885A6 /* AppDelegate.swift in Sources */,
