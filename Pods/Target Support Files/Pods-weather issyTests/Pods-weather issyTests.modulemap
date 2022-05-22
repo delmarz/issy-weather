@@ -1,0 +1,6 @@
+framework module Pods_weather_issyTests {
+  umbrella header "Pods-weather issyTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
