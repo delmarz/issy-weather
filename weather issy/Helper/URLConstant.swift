@@ -25,4 +25,8 @@ struct APPURL {
     static var WeatherDetail: URL? {
         return URL(string: BaseURL + "weather/")
     }
+    
+    static func iconURL(_ icon: String) -> URL? {
+        return URL(string: "http://openweathermap.org/img/wn/\(icon)@2x.png")
+    }
 }

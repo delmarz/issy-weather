@@ -8,6 +8,6 @@
 import Foundation
 
 struct WindModel: Codable {
-    let speed: Double
-    let deg: Double
+    let speed: Double?
+    let deg: Double?
 }

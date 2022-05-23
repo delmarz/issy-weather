@@ -7,7 +7,11 @@
 
 import RxSwift
 
-class APIManager {
+protocol APIManagerProtocol {
+    func load<T: Decodable>(resource: Resource<T>) -> Observable<T>
+}
+
+final class APIManager: APIManagerProtocol {
     func load<T: Decodable>(resource: Resource<T>) -> Observable<T> {
         return URLRequest.load(resource: resource)
     }

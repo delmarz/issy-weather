@@ -11,7 +11,7 @@
         <!--Weather-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="weather_issy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CityWeatherViewController" customModule="weather_issy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,15 +20,46 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="101" id="8QC-2g-s2I">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="101"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="weatherCell" rowHeight="80" id="8QC-2g-s2I" customClass="CityWeatherCell" customModule="weather_issy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8QC-2g-s2I" id="vhf-LO-vpf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="101"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="44o-i2-lBO">
+                                                    <rect key="frame" x="30" y="11" width="274" height="58"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hLm-KW-p0g">
+                                                    <rect key="frame" x="324" y="10" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="81t-rV-j0r"/>
+                                                        <constraint firstAttribute="width" constant="60" id="jar-In-nbN"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hLm-KW-p0g" firstAttribute="leading" secondItem="44o-i2-lBO" secondAttribute="trailing" constant="20" id="IFc-0R-aFy"/>
+                                                <constraint firstAttribute="trailing" secondItem="hLm-KW-p0g" secondAttribute="trailing" constant="30" id="L61-GA-3AE"/>
+                                                <constraint firstItem="44o-i2-lBO" firstAttribute="top" secondItem="vhf-LO-vpf" secondAttribute="topMargin" id="fWs-eY-XdK"/>
+                                                <constraint firstItem="hLm-KW-p0g" firstAttribute="centerY" secondItem="vhf-LO-vpf" secondAttribute="centerY" id="ke0-nw-gkI"/>
+                                                <constraint firstItem="44o-i2-lBO" firstAttribute="leading" secondItem="vhf-LO-vpf" secondAttribute="leadingMargin" constant="10" id="klr-Rm-GXE"/>
+                                                <constraint firstItem="44o-i2-lBO" firstAttribute="bottom" secondItem="vhf-LO-vpf" secondAttribute="bottomMargin" id="z4l-Ej-lGM"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cityWeatherNameLabel" destination="44o-i2-lBO" id="hJo-dX-IBn"/>
+                                            <outlet property="weatherImageView" destination="hLm-KW-p0g" id="O9c-fy-1Fr"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="RDN-Px-jWx"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="FVR-8U-fsH"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -41,10 +72,30 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Weather" id="5q7-3u-RjZ"/>
+                    <connections>
+                        <outlet property="tableView" destination="9ND-Sm-1aY" id="GrP-ZH-HWp"/>
+                        <segue destination="DbV-8i-OkR" kind="show" id="aMl-iL-oHA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="928.98550724637687" y="83.705357142857139"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="j1u-Nt-3kB">
+            <objects>
+                <viewController id="DbV-8i-OkR" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ERv-7e-gQa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="luU-AR-SV7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tOW-9w-Tht"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ac1-9N-0Iz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1757" y="76"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="50n-ie-adA">

@@ -8,5 +8,5 @@
 import Foundation
 
 struct CloudsModel: Codable {
-    let all: Double
+    let all: Double?
 }
