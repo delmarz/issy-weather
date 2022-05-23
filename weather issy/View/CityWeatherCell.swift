@@ -16,7 +16,6 @@ class CityWeatherCell: UITableViewCell {
     func configure(_ data: CityWeatherDataModel?) {
         guard let data = data else { return }
         cityWeatherNameLabel.text = data.cityName
-        print("dskfjf -> \(data.iconURL.absoluteString)")
         weatherImageView.kf.setImage(with: data.iconURL)
     }
 

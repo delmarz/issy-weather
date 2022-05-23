@@ -8,7 +8,9 @@
 import RxSwift
 
 protocol APIHandlerProtocol {
-   func getCityWeather() -> Observable<CityWeatherResult?>
+    ///Get weather List or byID
+    func getCityWeather() -> Observable<CityWeatherResult?>
+    func getCityWeather(byId: Int) -> Observable<CityWeatherItem?>
 }
 
 class APIHandler: APIHandlerProtocol {
@@ -19,13 +21,26 @@ class APIHandler: APIHandlerProtocol {
     }
     
     func getCityWeather() -> Observable<CityWeatherResult?> {
-        guard let url = APPURL.WeatherList else { return
+        guard let url = APPURL.weatherList else { return
             Observable.error(APIError.urlNotFound)
         }
         let resource = Resource<CityWeatherResult>(url: url)
         return apiManager.load(resource: resource)
             .map { weatherResult -> CityWeatherResult in
                 weatherResult
+            }
+            .asObservable()
+            .retry(2)
+    }
+    
+    func getCityWeather(byId: Int) -> Observable<CityWeatherItem?> {
+        guard let url = APPURL.weatherDetail(byId: byId) else { return
+            Observable.error(APIError.urlNotFound)
+        }
+        let resource = Resource<CityWeatherItem>(url: url)
+        return apiManager.load(resource: resource)
+            .map { weatherItem -> CityWeatherItem in
+                weatherItem
             }
             .asObservable()
             .retry(2)

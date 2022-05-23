@@ -57,6 +57,17 @@ class CityWeatherViewController: UIViewController {
         controller.addAction(okAction)
         present(controller, animated: true, completion: nil)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showToWeatherDetail" {
+            if let vc = segue.destination as? CityWeatherDetailViewController {
+                if let weatherItem = sender as? CityWeatherItem {
+                    vc.weatherItem = weatherItem
+                    vc.viewModel = CityWeatherDetailViewModel(weatherItemResult: weatherItem)
+                }
+            }
+        }
+    }
 }
 
 // MARK: - City Weather TV Data Source
@@ -78,6 +89,10 @@ extension CityWeatherViewController: UITableViewDataSource {
 extension CityWeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showToWeatherDetail", sender: weatherList[indexPath.row])
     }
 }
     

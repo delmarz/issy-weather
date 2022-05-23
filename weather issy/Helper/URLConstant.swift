@@ -18,12 +18,16 @@ struct APPURL {
     private static let Route = Routes.API
     private static let BaseURL = Domain + Route
     
-    static var WeatherList: URL? {
+    static var weatherList: URL? {
         return URL(string: BaseURL + "weather/list")
     }
     
-    static var WeatherDetail: URL? {
+    static var weatherDetail: URL? {
         return URL(string: BaseURL + "weather/")
+    }
+    
+    static func weatherDetail(byId: Int) -> URL? {
+        return URL(string: BaseURL + "weather/\(byId)")
     }
     
     static func iconURL(_ icon: String) -> URL? {
